@@ -1,7 +1,8 @@
+const config = require('config')
 const frisby = require('frisby')
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = config.get('test.serverUrl') + '/api'
+const REST_URL = config.get('test.serverUrl') + '/rest'
 
 describe('/api', () => {
   it('GET error when query /api without actual resource', done => {

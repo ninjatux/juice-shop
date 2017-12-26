@@ -1,10 +1,10 @@
+const config = require('config')
 const frisby = require('frisby')
 const Joi = frisby.Joi
 const insecurity = require('../../lib/insecurity')
-const config = require('config')
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = config.get('test.serverUrl') + '/api'
+const REST_URL = config.get('test.serverUrl') + '/rest'
 
 const customHeader = { 'X-User-Email': 'ciso@' + config.get('application.domain'), 'Authorization': 'Bearer ' + insecurity.authorize(), 'content-type': 'application/json' }
 const jsonHeader = { 'content-type': 'application/json' }

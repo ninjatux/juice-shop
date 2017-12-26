@@ -1,8 +1,9 @@
+const config = require('config')
 const frisby = require('frisby')
 const Joi = frisby.Joi
 const utils = require('../../lib/utils')
 
-const REST_URL = 'http://localhost:3000/rest/admin'
+const REST_URL = config.get('test.serverUrl') + '/rest/admin'
 
 describe('/rest/admin/application-version', () => {
   it('GET application version from package.json', done => {

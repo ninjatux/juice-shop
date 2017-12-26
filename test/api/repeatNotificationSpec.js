@@ -1,6 +1,7 @@
+const config = require('config')
 const frisby = require('frisby')
 
-const REST_URL = 'http://localhost:3000/rest'
+const REST_URL = config.get('test.serverUrl') + '/rest'
 
 describe('/rest/repeat-notification', () => {
   it('GET triggers repeating notification without passing a challenge', done => {

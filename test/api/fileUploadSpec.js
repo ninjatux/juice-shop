@@ -1,9 +1,10 @@
+const config = require('config')
 const frisby = require('frisby')
 const fs = require('fs')
 const path = require('path')
 const FormData = require('form-data')
 
-const URL = 'http://localhost:3000'
+const URL = config.get('test.serverUrl')
 
 // FIXME Adapt to solution of https://github.com/vlucas/frisby/issues/372
 describe('/file-upload', () => {

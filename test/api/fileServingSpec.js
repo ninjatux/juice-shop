@@ -1,5 +1,5 @@
-const frisby = require('frisby')
 const config = require('config')
+const frisby = require('frisby')
 
 const URL = 'http://localhost:3000'
 

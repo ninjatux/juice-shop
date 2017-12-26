@@ -1,6 +1,7 @@
+const config = require('config')
 const frisby = require('frisby')
 
-const URL = 'http://localhost:3000'
+const URL = config.get('test.serverUrl')
 
 describe('HTTP', () => {
   it('response must contain CORS header allowing all origins', done => {

@@ -17,6 +17,8 @@ application:
   recyclePage:
     topProductImage: "fruit_press.jpg"
     bottomProductImage: "apple_pressings.jpg"
+test:
+  serverUrl: 'http://127.0.0.1:3000'
 products:
   - name: "Apple Juice (1000ml)"
     price: 1.99

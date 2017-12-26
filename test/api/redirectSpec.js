@@ -1,6 +1,7 @@
+const config = require('config')
 const frisby = require('frisby')
 
-const URL = 'http://localhost:3000'
+const URL = config.get('test.serverUrl')
 
 describe('/redirect', () => {
   it('GET redirected to https://github.com/bkimminich/juice-shop when this URL is passed as "to" parameter', done => {

@@ -1,11 +1,11 @@
+const config = require('config')
 const frisby = require('frisby')
 const insecurity = require('../../lib/insecurity')
-const config = require('config')
 
 const christmasProduct = config.get('products').filter(product => product.useForChristmasSpecialChallenge)[0]
 
-const API_URL = 'http://localhost:3000/api'
-const REST_URL = 'http://localhost:3000/rest'
+const API_URL = config.get('test.serverUrl') + '/api'
+const REST_URL = config.get('test.serverUrl') + '/rest'
 
 describe('/rest/product/search', () => {
   it('GET product search with no matches returns no products', done => {
