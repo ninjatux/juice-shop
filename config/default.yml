@@ -19,6 +19,7 @@ application:
     bottomProductImage: "apple_pressings.jpg"
 test:
   serverUrl: 'http://127.0.0.1:3000'
+  proxyUrl: 'http://127.0.0.1:8282'
 products:
   - name: "Apple Juice (1000ml)"
     price: 1.99

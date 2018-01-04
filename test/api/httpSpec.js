@@ -3,6 +3,15 @@ const frisby = require('frisby')
 
 const URL = config.get('test.serverUrl')
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 describe('HTTP', () => {
   it('response must contain CORS header allowing all origins', done => {
     frisby.get(URL)

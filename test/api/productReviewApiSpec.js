@@ -6,6 +6,15 @@ const http = require('http')
 
 const REST_URL = config.get('test.serverUrl') + '/rest'
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 const authHeader = { 'Authorization': 'Bearer ' + insecurity.authorize(), 'content-type': 'application/json' }
 
 describe('/rest/product/:id/reviews', () => {
@@ -53,7 +62,15 @@ describe('/rest/product/reviews', () => {
   let reviewId
 
   beforeAll((done) => {
-    http.get(REST_URL + '/product/1/reviews', (res) => {
+    const targetUrl = REST_URL + '/product/1/reviews'
+    let options
+    if (process.env.USE_PROXY) {
+      options = require('url').parse(config.get('test.proxyUrl'))
+      options.path = targetUrl
+    } else {
+      options = targetUrl
+    }
+    http.get(options, (res) => {
       let body = ''
 
       res.on('data', chunk => {

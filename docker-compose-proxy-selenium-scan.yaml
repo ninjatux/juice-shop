@@ -1,0 +1,22 @@
+---
+version:
+  '3'
+services:
+  # setup
+  juice_shop:
+    image: bkimminich/juice-shop
+    network_mode: host
+  # chrome
+  selenium_chrome:
+    image: selenium/standalone-chrome
+    network_mode: host
+  # arachni proxy
+  arachni_selenium_proxy:
+    depends_on:
+      - juice_shop
+      - selenium_chrome
+    image: ahannigan/docker-arachni
+    network_mode: host
+    command: "bin/arachni --profile-load-filepath=/arachni/profiles/arachni-proxy-scan-quick-profile.afp http://$LOCAL_IP:4444"
+    volumes:
+      - "./arachni:/arachni/profiles"

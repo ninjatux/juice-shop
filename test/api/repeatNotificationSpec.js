@@ -3,6 +3,15 @@ const frisby = require('frisby')
 
 const REST_URL = config.get('test.serverUrl') + '/rest'
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 describe('/rest/repeat-notification', () => {
   it('GET triggers repeating notification without passing a challenge', done => {
     frisby.get(REST_URL + '/repeat-notification')

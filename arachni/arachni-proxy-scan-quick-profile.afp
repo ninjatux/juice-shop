@@ -1,0 +1,86 @@
+---
+audit:
+  exclude_vector_patterns: []
+  include_vector_patterns: []
+  link_templates: []
+  parameter_values: true
+  jsons: true
+  xmls: true
+  forms: true
+  cookies: false
+  headers: false
+  ui_inputs: false
+  ui_forms: false
+  parameter_names: false
+session: {}
+browser_cluster:
+  local_storage: {}
+  wait_for_elements: {}
+  pool_size: 10
+  job_timeout: 10
+  worker_time_to_live: 100
+  ignore_images: false
+  screen_width: 1600
+  screen_height: 1200
+input:
+  values: {}
+  default_values:
+    name: arachni_name
+    user: arachni_user
+    usr: arachni_user
+    pass: 5543!%arachni_secret
+    txt: arachni_text
+    num: '132'
+    amount: '100'
+    mail: arachni@email.gr
+    account: '12'
+    id: '1'
+  without_defaults: false
+  force: false
+scope:
+  redundant_path_patterns: {}
+  auto_redundant_paths: 5
+  dom_depth_limit: 3
+  page_limit: 20
+  exclude_file_extensions: []
+  exclude_path_patterns:
+  - /socket.io
+  - /bower_components
+  - /css
+  - /dist
+  - /redirect
+  exclude_content_patterns: []
+  include_path_patterns:
+  - /
+  - /rest
+  - /api
+  - /public
+  - /i18n
+  - /ftp
+  - /encryptionkeys
+  restrict_paths: []
+  extend_paths: []
+  url_rewrites: {}
+http:
+  user_agent: Arachni/v1.5.1
+  request_timeout: 10000
+  request_redirect_limit: 2
+  request_concurrency: 20
+  request_queue_size: 100
+  request_headers: {}
+  response_max_size: 500000
+  cookies: {}
+  authentication_type: auto
+datastore: {}
+checks:
+- "no_sql*"
+- "sql*"
+platforms:
+- linux
+- sql
+- nosql
+plugins:
+  proxy:
+    ignore_responses: true
+no_fingerprinting: false
+authorized_by: 

@@ -7,6 +7,15 @@ const christmasProduct = config.get('products').filter(product => product.useFor
 const API_URL = config.get('test.serverUrl') + '/api'
 const REST_URL = config.get('test.serverUrl') + '/rest'
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 describe('/rest/product/search', () => {
   it('GET product search with no matches returns no products', done => {
     frisby.get(REST_URL + '/product/search?q=nomatcheswhatsoever')

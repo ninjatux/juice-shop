@@ -1,0 +1,16 @@
+---
+version: '3'
+services:
+  # setup
+  juice_shop:
+    image: bkimminich/juice-shop
+    network_mode: host
+  # arachni proxy
+  arachni_proxy:
+    depends_on:
+      - juice_shop
+    image: ahannigan/docker-arachni
+    network_mode: host
+    command: "bin/arachni --profile-load-filepath=/arachni/profiles/arachni-proxy-scan-quick-profile.afp http://$LOCAL_IP:3000"
+    volumes:
+      - "./arachni:/arachni/profiles"

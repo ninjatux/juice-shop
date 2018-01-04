@@ -3,6 +3,16 @@ const frisby = require('frisby')
 
 const URL = config.get('test.serverUrl')
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  const agent = new HttpProxyAgent(config.get('test.proxyUrl'))
+  frisby.globalSetup({
+    request: {
+      agent: agent
+    }
+  })
+}
+
 describe('/redirect', () => {
   it('GET redirected to https://github.com/bkimminich/juice-shop when this URL is passed as "to" parameter', done => {
     frisby.get(URL + '/redirect?to=https://github.com/bkimminich/juice-shop', { redirect: 'manual' })

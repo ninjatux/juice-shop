@@ -4,6 +4,17 @@ const frisby = require('frisby')
 const API_URL = config.get('test.serverUrl') + '/api'
 const REST_URL = config.get('test.serverUrl') + '/rest'
 
+console.log(API_URL)
+
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 describe('/api', () => {
   it('GET error when query /api without actual resource', done => {
     frisby.get(API_URL)

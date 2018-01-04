@@ -5,6 +5,15 @@ const insecurity = require('../../lib/insecurity')
 
 const API_URL = config.get('test.serverUrl') + '/api'
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 const authHeader = { 'Authorization': 'Bearer ' + insecurity.authorize(), 'content-type': 'application/json' }
 
 describe('/api/Recycles', () => {

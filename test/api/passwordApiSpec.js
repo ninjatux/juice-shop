@@ -4,6 +4,15 @@ const frisby = require('frisby')
 const API_URL = config.get('test.serverUrl') + '/api'
 const REST_URL = config.get('test.serverUrl') + '/rest'
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 const jsonHeader = { 'content-type': 'application/json' }
 
 describe('/rest/user/change-password', () => {

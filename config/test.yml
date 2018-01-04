@@ -1,3 +1,1 @@
 # Use default configuration during automated test execution
-test:
-  serverUrl: 'http://127.0.0.1:3000'

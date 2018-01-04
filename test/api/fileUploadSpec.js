@@ -6,6 +6,15 @@ const FormData = require('form-data')
 
 const URL = config.get('test.serverUrl')
 
+if (process.env.USE_PROXY) {
+  const HttpProxyAgent = require('http-proxy-agent')
+  frisby.globalSetup({
+    request: {
+      agent: new HttpProxyAgent(config.get('test.proxyUrl'))
+    }
+  })
+}
+
 // FIXME Adapt to solution of https://github.com/vlucas/frisby/issues/372
 describe('/file-upload', () => {
   let file, form

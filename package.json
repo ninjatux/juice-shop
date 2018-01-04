@@ -93,6 +93,7 @@
     "cross-spawn": "~5.1",
     "form-data": "~2.3",
     "frisby": "~2.0",
+    "http-proxy-agent": "^2.0.0",
     "http-server": "~0.10",
     "jasmine-reporters": "~2.2",
     "jest": "~21",
@@ -106,6 +107,7 @@
     "karma-phantomjs-launcher": "~1.0",
     "karma-safari-launcher": "~1.0",
     "lcov-result-merger": "~1.2",
+    "lodash": "^4.17.4",
     "mocha": "~4",
     "nyc": "~11",
     "phantomjs-prebuilt": "~2",
@@ -140,7 +142,15 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "node test/e2eTests.js",
     "stryker": "stryker run stryker.client-conf.js",
-    "vagrant": "cd vagrant && vagrant up"
+    "vagrant": "cd vagrant && vagrant up",
+    "arachni-automated-scan": "arachni_multi --instance-spawn 5 --profile-load-filepath=arachni/arachni-automated-scan-quick-profile.afp http://$LOCAL_IP:3000",
+    "arachni-automated-report": "arachni_reporter reports/arachni-automated-scan-report.afr --reporter=html:outfile=reports/arachni-automated-scan-report.html.zip && unzip -d reports/arachni-automated-scan-report reports/arachni-automated-scan-report.html.zip",
+    "arachni-proxy-start": "arachni --profile-load-filepath=arachni/arachni-proxy-scan-quick-profile.afp http://$LOCAL_IP:3000",
+    "arachni-proxy-api-test": "USE_PROXY=true NODE_CONFIG_1='{\"test\":{\"serverUrl\":\"http://' NODE_CONFIG_2=':3000/\", \"proxyUrl\":\"http://127.0.0.1:8282\"}}' NODE_CONFIG=$NODE_CONFIG_1$LOCAL_IP$NODE_CONFIG_2 jest --forceExit",
+    "arachni-proxy-api-vectors": "http_proxy=http://selenium:8282 curl http://arachni.proxy/panel/vectors.yml -o reports/arachni-api-vectors.yml",
+    "arachni-proxy-selenium-test": "protractor protractor.conf.js",
+    "arachni-proxy-selenium-vectors": "http_proxy=http://localhost:8282 curl http://arachni.proxy/panel/vectors.yml -o reports/arachni-selenium-vectors.yml",
+    "arachni-proxy-shutdown": "http_proxy=http://localhost:8282 curl http://arachni.proxy/shutdown || true"
   },
   "engines": {
     "node": ">=6 <=9"

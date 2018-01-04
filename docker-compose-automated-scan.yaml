@@ -1,0 +1,46 @@
+version: '2'
+services:
+  js_1:
+    image: bkimminich/juice-shop
+  js_2:
+    image: bkimminich/juice-shop
+  js_3:
+    image: bkimminich/juice-shop
+  js_4:
+    image: bkimminich/juice-shop
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - js_1
+      - js_2
+      - js_3
+      - js_4
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 3000:80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

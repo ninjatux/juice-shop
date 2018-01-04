@@ -1,0 +1,70 @@
+---
+audit:
+  exclude_vector_patterns: []
+  include_vector_patterns: []
+  link_templates: []
+  parameter_values: true
+  jsons: true
+  xmls: true
+  forms: true
+  cookies: true
+  headers: true
+  ui_inputs: true
+  ui_forms: true
+  parameter_names: true
+session: {}
+browser_cluster:
+  local_storage: {}
+  wait_for_elements: {}
+  pool_size: 10
+  job_timeout: 10
+  worker_time_to_live: 100
+  ignore_images: false
+  screen_width: 1600
+  screen_height: 1200
+input:
+  values: {}
+  default_values:
+    name: arachni_name
+    user: arachni_user
+    usr: arachni_user
+    pass: 5543!%arachni_secret
+    txt: arachni_text
+    num: '132'
+    amount: '100'
+    mail: arachni@email.gr
+    account: '12'
+    id: '1'
+  without_defaults: false
+  force: false
+scope:
+  redundant_path_patterns: {}
+  auto_redundant_paths: 5
+  exclude_file_extensions: []
+  exclude_path_patterns:
+  - /socket.io
+  - /bower_components
+  - /css
+  - /dist
+  exclude_content_patterns: []
+  include_path_patterns: []
+  restrict_paths: []
+  extend_paths: []
+  url_rewrites: {}
+http:
+  user_agent: Arachni/v1.5.1
+  request_timeout: 10000
+  request_redirect_limit: 2
+  request_concurrency: 20
+  request_queue_size: 100
+  request_headers: {}
+  response_max_size: 500000
+  cookies: {}
+  authentication_type: auto
+datastore:
+  report_path: reports/arachni-automated-scan-full-report.afr
+checks: []
+platforms: []
+plugins: {}
+no_fingerprinting: false
+authorized_by: 
