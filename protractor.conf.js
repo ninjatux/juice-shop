@@ -1,5 +1,5 @@
 'use strict'
-const LOCAL_IP = process.env.LOCAL_IP
+const LOCAL_IP = process.env.LOCAL_IP || '127.0.0.1'
 const USE_PROXY = process.env.USE_PROXY
 
 let config = {
